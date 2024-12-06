@@ -10,7 +10,7 @@ export default function Header2() {
     setIsOpen(!isOpen)
   }
   const handleClose = () => {
-    setIsOpen(!isOpen)
+    setIsOpen(false)
   }
 
   return (
@@ -59,7 +59,7 @@ export default function Header2() {
 
         </div>
       </div>
-      <div className={`bg-slate-100 lg:hidden font-bold text-[#DB4444]  z-0 w-screen ${isOpen ? "h-[250px] opacity-100": "h-0 opacity-0" } h-[250px]`}>
+      <div className={`bg-slate-100 lg:hidden font-bold text-[#DB4444]  z-0 w-screen ${isOpen ? "h-[250px] opacity-100": "h-0 opacity-0" } `}>
       <ul className="text-2xl grid gap-[20px] p-5  justify-center items-center">
       <Link href={"/home"}>
               <li onClick={handleClose} className="cursor-pointer text-[#DB4444] text-center">Home</li>
