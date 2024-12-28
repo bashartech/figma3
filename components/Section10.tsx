@@ -222,7 +222,7 @@ if (loading) {
 
               <div className="boxes  w-full mt-10 grid md:grid-cols-2 lg:grid-cols-4 justify-center gap-6 ">
                 {
-                  data.map((item, index)=>(
+                  data.map((item)=>(
                     // <div key={index}>
                 <div className="box md:h-full md:w-[270px] " >
                   <div className="img mb-3">
@@ -231,8 +231,6 @@ if (loading) {
                       alt="hero image"
                       width={300}
                       height={400}
-                      // width={item.width}
-                      // height={item.height}
                     ></Image>
                   </div>
                   <div className="text flex flex-col gap-2">
@@ -251,7 +249,7 @@ if (loading) {
                     </div>
                   </div>
                 </div>
-                    // </div>
+                    
                   ))
                 }
                 {/* <div className="box h-full w-[270px] ">
