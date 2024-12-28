@@ -198,8 +198,8 @@ export default function Section1() {
           </div>
 
           <div className="boxes  lg:w-full mt-10 gap-10 lg:gap-0 grid lg:grid-cols-4 md:grid-cols-2 justify-center ">
-            {data.map((items) => (
-              <div className="box h-full w-[270px] ">
+            {data.map((items, index) => (
+              <div className="box h-full w-[270px] " key={index}>
                 <div className="img mb-5">
                   <Link href={`/home/${items.id}`}>
                     <Image

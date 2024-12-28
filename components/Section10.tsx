@@ -222,9 +222,9 @@ if (loading) {
 
               <div className="boxes  w-full mt-10 grid md:grid-cols-2 lg:grid-cols-4 justify-center gap-6 ">
                 {
-                  data.map((item)=>(
-                    // <div key={index}>
-                <div className="box md:h-full md:w-[270px] " >
+                  data.map((item, index)=>(
+                    
+                <div className="box md:h-full md:w-[270px] " key={index} >
                   <div className="img mb-3">
                     <Image
                       src={item.thumbnail}
