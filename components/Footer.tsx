@@ -38,11 +38,11 @@ export default function Footer() {
               <Link href={"/cart"}>
                 <li>Cart</li>
                </Link>
-               <Link href={"/wishlist"}>
-                <li>Wishlist</li>
+               <Link href={"#products"}>
+                <li>Products</li>
                 
               </Link>
-              <Link href={"#product"}>
+              <Link href={"#itemProduct"}>
                 <li>Shop</li>
                 
               </Link>
@@ -52,10 +52,17 @@ export default function Footer() {
             <div className="row gap-4 flex flex-col w-[217px] h-[188px]">
             <h1 className='font-bold text-[24px]'>Quick Link</h1>
             <ul className='flex flex-col gap-3'>
-                <li>Privacy Policy</li>
-                <li>Terms Of Use</li>
-                <li>FAQ</li>
+            <Link href={"/cart"}>
+                <li>Cart</li>
+               </Link>
+               <Link href={"/about"}>
+                <li>About</li>
+                
+              </Link>
+              <Link href={"/contact"}>
                 <li>Contact</li>
+                
+              </Link>
             </ul>
             </div>
 

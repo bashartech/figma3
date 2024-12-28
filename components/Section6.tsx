@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Section6() {
   return (
@@ -19,8 +20,9 @@ export default function Section6() {
               </div>
             </div>
           </div>
-
-          <div className="images w-full lg:h-[600px] grid lg:grid-cols-4 grid-cols-2 lg:grid-rows-2 ">
+<Link href={"#products"}>
+          <div className="images w-full lg:h-[600px] grid lg:grid-cols-4 grid-cols-2 lgows-2 ">
+            
             <div className="col-span-2 row-span-2 ">
             <Image
             className="md:w-[700px] lg:w-[570px]"
@@ -30,6 +32,8 @@ export default function Section6() {
               height={600}
             ></Image>
             </div>
+            
+            
             <div className="col-span-2 row-span-1 ">
             <Image
             className="md:w-[700px] lg:w-[570px]"
@@ -39,6 +43,8 @@ export default function Section6() {
               height={284}
             ></Image>
             </div>
+            
+            
             <div className="">
             <Image
             className="md:w-[350px] lg:w-[270px]"
@@ -48,6 +54,8 @@ export default function Section6() {
               height={284}
             ></Image>
             </div>
+            
+            
             <div className=" ">
             <Image
             className="md:w-[350px] lg:w-[270px]"
@@ -57,8 +65,10 @@ export default function Section6() {
               height={284}
             ></Image>
             </div>
+            
 
           </div>
+</Link>
         </div>
       </div>
     </div>

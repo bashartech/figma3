@@ -1,16 +1,85 @@
-import React from "react";
+"use client"
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 
-export default function Section10() {
+interface ITodo {
+  id: number,
+  title: string,
+  description: string,
+  image: string,
+  // width: number,
+  // height: number,
+  thumbnail: string
+  // rating: number,
+  price: number
+}
+interface IProductResponse {
+  products: ITodo[];
+  total: number;
+  skip: number;
+  limit: number;
+}
+
+interface ITodos {
+  id: number;
+  title: string;
+  price: number;
+  category: string;
+  description: string;
+  image: string;
+}
+
+export default function Section10({params,}: {params: {item:string}}) {
+
+  const [data, setData] = useState<ITodo[]>([])
+  const [loading, setLoading] = useState(true);
+  const [cartData, setCartData] = useState<ITodos | null>(null)
+
+useEffect(()=>{
+  const fetchData = async () => {
+    setLoading(true);
+    const parsedData = await fetch("https://dummyjson.com/products");
+    const response:IProductResponse = await parsedData.json();
+    setData(response.products);
+    setLoading(false);
+  };
+  fetchData();
+
+},[setData])
+
+useEffect(()=>{
+  const fetchCartData = async () => {
+    setLoading(true);
+    const parsedData = await fetch(`https://fakestoreapi.com/products/${params.item}`);
+    const response:ITodos = await parsedData.json();
+    setCartData(response);
+    setLoading(false);
+  };
+  fetchCartData();
+
+},[params.item])
+if (!cartData) {
+  return (
+  <div>No product data available.</div>
+  );
+}
+if (loading) {
+  return (
+    <div className="flex justify-center items-center h-screen bg-gradient-to-br from-turquoise-100 to-lavender-200">
+      loading...
+    </div>
+  );
+}
   return (
     <div>
       <link
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
         rel="stylesheet"
       />
-      <div className="w-screen lg:h-[1500px] flex justify-center items-center">
-        <div className="lg:w-[1170px] lg:h-[1350px]">
+      <div className="w-screen  flex justify-center items-center">
+
+        <div className="lg:w-[1170px] ">
           <div>
             <h1>Account / Gaming / Havic HV G-92 Gamepad</h1>
           </div>
@@ -18,16 +87,18 @@ export default function Section10() {
             <div className="md:flex hidden">
               <Image
                 className=""
-                src={"/images/img46.svg"}
+                src={cartData.image}
+                // src={"/images/img46.svg"}
                 alt="hero image"
                 width={170}
                 height={138}
               ></Image>
             </div>
+
             <div className="col-span-2 row-span-5 ">
               <Image
                 className=""
-                src={"/images/img45.svg"}
+                src={cartData.image}
                 alt="hero image"
                 width={500}
                 height={600}
@@ -35,7 +106,7 @@ export default function Section10() {
             </div>
             <div className="col-span-2 row-span-5 flex flex-col justify-center md:items-start items-center">
               <h1 className="text-[24px] font-semibold ">
-                Havic HV G-92 Gamepad
+                {cartData.title}
               </h1>
               <div className="start flex gap-1  items-center">
                 <i className="bx bxs-star text-[#FFAD33]"></i>
@@ -46,11 +117,9 @@ export default function Section10() {
                 <span>(150 Reciews) | </span>{" "}
                 <span className="text-[#00FF66]">In Stock</span>
               </div>
-              <p className="text-[24px]">$192.00</p>
+              <p className="text-[24px]">{cartData.price}</p>
               <p className="mt-4">
-                PlayStation 5 Controller Skin High quality vinyl with air
-                channel adhesive for easy bubble free install & mess free
-                removal Pressure sensitive.
+                {cartData.description}
               </p>
               <div className="line mt-4 bg-black w-[400px] h-[1px] "></div>
               <div className="mt-10 ">
@@ -142,8 +211,8 @@ export default function Section10() {
               ></Image>
             </div>
           </div>
-          <div className="w-full mt-20 mb-10 lg:h-[600px] flex flex-col items-center">
-            <div className="lg:w-[1170px] md:w-[700px]  w-[350px] lg:h-[493px] gap-5 flex flex-col">
+          <div className="w-full mt-20 mb-10  flex flex-col items-center">
+            <div className="lg:w-[1170px] md:w-[700px]  w-[350px]  gap-5 flex flex-col">
               <div className="h-[40px] lg:w-[150px] flex lg:justify-center items-center gap-2 ">
                 <div className="w-[20px] h-[40px] rounded bg-[#DB4444]"></div>
                 <div>
@@ -151,21 +220,26 @@ export default function Section10() {
                 </div>
               </div>
 
-              <div className="boxes lg:h-[350px] w-full mt-10 grid md:grid-cols-2 lg:grid-cols-4 justify-center gap-6 ">
-                <div className="box md:h-full md:w-[270px] ">
+              <div className="boxes  w-full mt-10 grid md:grid-cols-2 lg:grid-cols-4 justify-center gap-6 ">
+                {
+                  data.map((item, index)=>(
+                    // <div key={index}>
+                <div className="box md:h-full md:w-[270px] " >
                   <div className="img mb-3">
                     <Image
-                      src={"/images/img39.svg"}
+                      src={item.thumbnail}
                       alt="hero image"
-                      width={270}
-                      height={250}
+                      width={300}
+                      height={400}
+                      // width={item.width}
+                      // height={item.height}
                     ></Image>
                   </div>
                   <div className="text flex flex-col gap-2">
-                    <h1 className="font-medium">HAVIT HV-G92 Gamepad</h1>
+                    <h1 className="font-medium">{item.title}</h1>
                     <div className=" flex gap-5">
-                      <span className="text-[#DB4444]">$120</span>{" "}
-                      <span className="line-through">$160</span>
+                      <span className="text-[#DB4444]">{item.price}</span>{" "}
+                      <span className="line-through">{item.price}</span>
                     </div>
                     <div className="start flex gap-1 items-center">
                       <i className="bx bxs-star text-[#FFAD33]"></i>
@@ -173,11 +247,14 @@ export default function Section10() {
                       <i className="bx bxs-star text-[#FFAD33]"></i>
                       <i className="bx bxs-star text-[#FFAD33]"></i>
                       <i className="bx bxs-star text-[#FFAD33]"></i>
-                      <span>(88)</span>
+                      <span>{0}</span>
                     </div>
                   </div>
                 </div>
-                <div className="box h-full w-[270px] ">
+                    // </div>
+                  ))
+                }
+                {/* <div className="box h-full w-[270px] ">
                   <div className="img mb-3">
                     <Image
                       src={"/images/img40.svg"}
@@ -251,7 +328,7 @@ export default function Section10() {
                       <span>(65)</span>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

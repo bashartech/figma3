@@ -2,6 +2,7 @@
 import React,{useState} from "react";
 import { Input } from "@/components/ui/input";
 import Link from "next/link"
+import { useCart } from "@/components/cartContext";
 
 export default function Header2() {
 
@@ -12,6 +13,8 @@ export default function Header2() {
   const handleClose = () => {
     setIsOpen(false)
   }
+  const {cartItems} = useCart()
+  const cartCount = cartItems.length
 
   return (
     <>
@@ -51,7 +54,14 @@ export default function Header2() {
               <i className="bx bx-search-alt-2 hidden md:block"></i>
             </div>
             <i className="bx bx-heart text-3xl text-"></i>
-            <i className="bx bx-cart text-3xl text-"></i>
+
+            <div>
+              <Link href={"/cart"} className='flex justify-center items-center'>
+            <i className="bx bx-cart  text-3xl text-indigo-900 cursor-pointer"></i>
+            <span className="bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">{cartCount}</span>
+              </Link>
+            </div>
+
             <div className="lg:hidden">
               <i className="bx bx-menu cursor-pointer text-3xl" onClick={handleClick}></i>
             </div>

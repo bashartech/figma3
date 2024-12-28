@@ -9,7 +9,6 @@ export default function ProductPage() {
     <div className='overflow-hidden'>
       <Header1/>
       <Header2/>
-      <Section10/>
       <Footer/>
     </div>
   )
