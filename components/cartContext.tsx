@@ -122,6 +122,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     }
   }, [cartItems]);
   const addToCart = (item: CartItem) => {
+    alert("Product is added in the cart")
     setCartItems((prev) => {
       const existingItem = prev.find((cartItem) => cartItem.id === item.id);
       if (existingItem) {

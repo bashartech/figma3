@@ -167,6 +167,7 @@ interface ITodos {
                     quantity: 1,
                     image: data.image,
                     description: data.description,
+                    
                     })}
                   >
                     Add to Cart
