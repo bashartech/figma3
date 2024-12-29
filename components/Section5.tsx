@@ -18,24 +18,111 @@ interface ITodo {
 export default function Section5() {
   const [data, setData] = useState<ITodo[]>([])
   const [loading, setLoading] = useState(true);
-  useEffect(()=>{
-  const fetchData = async () => {
-    setLoading(true)
-    const parsedData = await fetch("https://fakestoreapi.com/products")
-    const respose:ITodo[] = await parsedData.json()
-    setData(respose)
-    setLoading(false)
-  }
-  fetchData()
-  },[setData])
+  useEffect(() => {
+      const fetchData = async () => {
+        try {
+          const parsedData = await fetch("http://localhost:3000/api/productsItem");
+          if (!parsedData.ok) {
+            throw new Error("Failed to fetch data");
+          }
+          const response: ITodo[] = await parsedData.json();
+          setData(response);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      fetchData();
+    }, []);
   const [width, setWidth] = useState(0)
   const carousel = useRef<HTMLDivElement>(null)
-
-  useEffect(() => {
-    if (carousel.current) {
-      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
-    }
-  }, [data])
+  if (!Array.isArray(data) || data.length === 0) {
+    return  <div className="flex items-center justify-center h-64 bg-gradient-to-br from-red-50 to-white rounded-lg shadow-lg overflow-hidden">
+    <div className="relative w-40 h-40">
+      <motion.div
+        className="absolute inset-0 border-4 border-red-500 rounded-full"
+        animate={{
+          scale: [1, 1.2, 1],
+          rotate: [0, 180, 360],
+          borderRadius: ["50%", "40%", "50%"],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div
+        className="absolute inset-2 border-4 border-red-300 rounded-full"
+        animate={{
+          scale: [1.2, 1, 1.2],
+          rotate: [360, 180, 0],
+          borderRadius: ["40%", "50%", "40%"],
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          ease: "easeInOut",
+        }}
+      />
+      <motion.div 
+        className="absolute inset-0 flex items-center justify-center"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse" }}
+      >
+        <motion.svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="text-red-500"
+        >
+          <line x1="12" y1="2" x2="12" y2="6"></line>
+          <line x1="12" y1="18" x2="12" y2="22"></line>
+          <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+          <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+          <line x1="2" y1="12" x2="6" y2="12"></line>
+          <line x1="18" y1="12" x2="22" y2="12"></line>
+          <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+          <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+        </motion.svg>
+      </motion.div>
+    </div>
+    <div className="ml-4">
+      <motion.div
+        className="text-red-500 text-2xl font-bold"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+      >
+        Loading
+      </motion.div>
+      <motion.div 
+        className="flex space-x-1 mt-2"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5, delay: 0.4 }}
+      >
+        {[0, 1, 2].map((index) => (
+          <motion.div
+            key={index}
+            className="w-2 h-2 bg-red-400 rounded-full"
+            animate={{ y: [-3, 3] }}
+            transition={{ duration: 0.5, repeat: Infinity, repeatType: "reverse", delay: index * 0.1 }}
+          />
+        ))}
+      </motion.div>
+    </div>
+  </div>
+    ;
+  }
   if(loading){
     return(
 
