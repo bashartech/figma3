@@ -22,7 +22,7 @@ export default function Section5() {
       const fetchData = async () => {
         try {
           const parsedData = await fetch(
-            process.env.API_URL ||"http://localhost:3000/api/productsItem"
+           `${process.env.API_URL}/api/productsItem`
              );
           if (!parsedData.ok) {
             throw new Error("Failed to fetch data");
