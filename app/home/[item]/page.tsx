@@ -86,108 +86,96 @@ interface ITodos {
       }
     
   return (
+
     <div className='overflow-hidden'>
-      <Header1/>
-      <Header2/>
-      <div>
-      <div className="main mb-10 mt-14 w-full grid md:grid-cols-5 gap-5 md:grid-rows-4 ">
-            <div className="md:flex hidden">
-              <Image
-                className=""
-                src={data.image}
-                alt="hero image"
-                width={170}
-                height={138}
-              ></Image>
-            </div>
+    <Header1 />
+    <Header2 />
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="main my-8 md:my-14 w-full">
+        <div className="grid md:grid-cols-5 gap-5 md:grid-rows-4">
+          <div className="hidden md:block">
+            <Image
+              src={data.image}
+              alt="Product thumbnail"
+              width={170}
+              height={138}
+              className="object-cover rounded-lg"
+            />
+          </div>
 
-            <div className="col-span-2 row-span-5 ">
-              <Image
-                className=""
-                src={data.image}
-                alt="hero image"
-                width={500}
-                height={600}
-              ></Image>
+          <div className="col-span-full md:col-span-2 md:row-span-5">
+            <Image
+              src={data.image}
+              alt={data.title}
+              width={500}
+              height={600}
+              className="w-full h-auto object-cover rounded-lg"
+            />
+          </div>
+
+          <div className="col-span-full md:col-span-2 md:row-span-5 flex flex-col justify-center items-start space-y-4">
+            <h1 className="text-2xl md:text-3xl font-semibold">{data.title}</h1>
+            <div className="flex items-center space-x-2">
+              {[...Array(5)].map((_, i) => (
+                <i key={i} className="bx bxs-star text-yellow-400"></i>
+              ))}
+              <span className="text-sm text-gray-600">(150 Reviews) | </span>
+              <span className="text-sm text-green-500">In Stock</span>
             </div>
-            <div className="col-span-2 row-span-5 flex flex-col justify-center md:items-start items-center">
-              <h1 className="text-[24px] font-semibold ">
-                {data.title}
-              </h1>
-              <div className="start flex gap-1  items-center">
-                <i className="bx bxs-star text-[#FFAD33]"></i>
-                <i className="bx bxs-star text-[#FFAD33]"></i>
-                <i className="bx bxs-star text-[#FFAD33]"></i>
-                <i className="bx bxs-star text-[#FFAD33]"></i>
-                <i className="bx bxs-star text-[#FFAD33]"></i>
-                <span>(150 Reciews) | </span>{" "}
-                <span className="text-[#00FF66]">In Stock</span>
+            <p className="text-2xl font-bold text-red-600">{data.price}</p>
+            <p className="text-gray-700">{data.description}</p>
+            <div className="w-full h-px bg-gray-200 my-4"></div>
+            <div className="space-y-4 w-full">
+              <div className="flex items-center space-x-4">
+                <h2 className="text-lg font-medium">Colors:</h2>
+                <div className="flex space-x-2">
+                  <button className="w-6 h-6 bg-blue-300 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"></button>
+                  <button className="w-6 h-6 bg-red-300 rounded-full border-2 border-gray-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"></button>
+                </div>
               </div>
-              <p className="text-[24px]">{data.price}</p>
-              <p className="mt-4">
-                {data.description}
-              </p>
-              <div className="line mt-4 bg-black w-[400px] h-[1px] "></div>
-              <div className="mt-10 ">
-                <div className="colors flex gap-2">
-                  <h1 className="text-[20px] font-medium">Colours:</h1>
-
-                  <h1 className="w-[20px] h-[20px] bg-[#A0BCE0] border-[#000000] border-2  rounded-full"></h1>
-                  <h1 className="w-[20px] h-[20px] bg-[#E07575] rounded-full"></h1>
+              <div className="flex items-center space-x-4">
+                <h2 className="text-lg font-medium">Size:</h2>
+                <div className="flex space-x-2">
+                  {['XS', 'S', 'M', 'L', 'XL'].map((size) => (
+                    <button
+                      key={size}
+                      className="w-10 h-10 flex items-center justify-center border border-gray-300 rounded-md hover:bg-red-500 hover:text-white transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                    >
+                      {size}
+                    </button>
+                  ))}
                 </div>
-                <div className="mt-7 w-296px h-[32px] flex gap-4 ">
-                  <p className="text-[20px] font-medium">Size:</p>
-                  <div className="size flex gap-4">
-                    <div className="box flex justify-center items-center w-[32px] h-[32px] border-black border-[1px] hover:bg-[#DB4444] ">
-                      XS
-                    </div>
-                    <div className="box flex justify-center items-center w-[32px] h-[32px] border-black border-[1px] hover:bg-[#DB4444] ">
-                      S
-                    </div>
-                    <div className="box flex justify-center items-center w-[32px] h-[32px] text-[#111] border-black border-[1px] hover:bg-[#DB4444]">
-                      M
-                    </div>
-                    <div className="box flex justify-center items-center w-[32px] h-[32px] border-black border-[1px] hover:bg-[#DB4444] ">
-                      L
-                    </div>
-                    <div className="box flex justify-center items-center w-[32px] h-[32px] border-black border-[1px] hover:bg-[#DB4444] ">
-                      XL
-                    </div>
-                  </div>
-                </div>
-                <div className=" flex gap-4 mt-7">
-                  
-                  <Button
-                    variant="default"
-                    className="bg-[#DB4444] w-[165px] h-[44px] font-medium"
-                    onClick={() => addToCart({
+              </div>
+              <div className="flex items-center space-x-4">
+                <Button
+                  variant="default"
+                  className="bg-red-600 hover:bg-red-700 text-white font-medium px-6 py-2 rounded-full transition-colors duration-200"
+                  onClick={() => addToCart({
                     id: data.id,
                     title: data.title,
                     price: data.price,
                     quantity: 1,
                     image: data.image,
                     description: data.description,
-                    
-                    })}
-                  >
-                    Add to Cart
-                  </Button>
-
+                  })}
+                >
+                  Add to Cart
+                </Button>
+                <button className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500">
                   <Image
-                    className=""
                     src={data.image}
-                    alt="hero image"
-                    width={40}
-                    height={40}
-                  ></Image>
-                </div>
-                
+                    alt="Favorite"
+                    width={24}
+                    height={24}
+                  />
+                </button>
               </div>
             </div>
-            
           </div>
+        </div>
       </div>
-      <Footer/>
     </div>
+    <Footer />
+  </div>
   )
 }
