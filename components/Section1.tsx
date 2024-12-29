@@ -22,7 +22,7 @@ export default function Section1() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/api/productsItem");
+        const response = await fetch(process.env.API_URL || "http://localhost:3000/api/productsItem");
         if (!response.ok) {
           throw new Error("Failed to fetch data");
         }

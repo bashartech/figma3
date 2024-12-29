@@ -21,7 +21,9 @@ export default function Section5() {
   useEffect(() => {
       const fetchData = async () => {
         try {
-          const parsedData = await fetch("http://localhost:3000/api/productsItem");
+          const parsedData = await fetch(
+            process.env.API_URL ||"http://localhost:3000/api/productsItem"
+             );
           if (!parsedData.ok) {
             throw new Error("Failed to fetch data");
           }
