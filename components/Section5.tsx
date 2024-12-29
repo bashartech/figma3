@@ -35,8 +35,13 @@ export default function Section5() {
       };
       fetchData();
     }, []);
-  const [width, setWidth] = useState(0)
   const carousel = useRef<HTMLDivElement>(null)
+  const [width, setWidth] = useState(0)
+  useEffect(() => {
+    if (carousel.current) {
+      setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth)
+    }
+  }, [data])
   if (!Array.isArray(data) || data.length === 0) {
     return  <div className="flex items-center justify-center h-64 bg-gradient-to-br from-red-50 to-white rounded-lg shadow-lg overflow-hidden">
     <div className="relative w-40 h-40">
